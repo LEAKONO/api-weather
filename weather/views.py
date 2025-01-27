@@ -1,8 +1,5 @@
 from django.shortcuts import render
-
-# Create your views here.
 import requests
-from django.shortcuts import render
 
 def weather_view(request):
     weather_data = None
@@ -10,7 +7,7 @@ def weather_view(request):
 
     if request.method == "POST":
         city = request.POST.get("city")
-        api_key = "YOUR_API_KEY"  # Replace with your OpenWeatherMap API key
+        api_key = "YOUR_API_KEY"  # Replace with your actual OpenWeatherMap API key
         url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&units=metric&appid={api_key}"
 
         response = requests.get(url)
@@ -26,4 +23,3 @@ def weather_view(request):
             error = f"Could not retrieve weather for {city}. Please check the city name."
 
     return render(request, "weather/index.html", {"weather_data": weather_data, "error": error})
-
